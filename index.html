@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | shader-testing</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Unity WebGL Player | WhiteCanvas</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    <link rel="stylesheet" href="TemplateData/style.css" />
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -19,19 +19,24 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">shader-testing</div>
+        <div id="unity-build-title">WhiteCanvas</div>
       </div>
     </div>
     <script>
+	var loaderFile = "shader-testing.loader.js";
+	var dataFile = "shader-testing.data.unityweb";
+	var frameworkFile = "shader-testing.framework.js.unityweb";
+	var codeFile = "shader-testing.wasm.unityweb";
+	
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/shader-testing.loader.js";
+      var loaderUrl = buildUrl + "/" + loaderFile;
       var config = {
-        dataUrl: buildUrl + "/shader-testing.data",
-        frameworkUrl: buildUrl + "/shader-testing.framework.js",
-        codeUrl: buildUrl + "/shader-testing.wasm",
+        dataUrl: buildUrl + "/" + dataFile,
+        frameworkUrl: buildUrl + "/" + frameworkFile,
+        codeUrl: buildUrl + "/" + codeFile,
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "PeakActivity",
-        productName: "shader-testing",
+        companyName: "PeakActiviry",
+        productName: "WhiteCanvas",
         productVersion: "0.1",
       };
 
@@ -55,14 +60,17 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };
-        }).catch((message) => {
-          alert(message);
-        });
+        })
+          .then((unityInstance) => {
+            loadingBar.style.display = "none";
+            window.unityInstance = unityInstance;
+            fullscreenButton.onclick = () => {
+              unityInstance.SetFullscreen(1);
+            };
+          })
+          .catch((message) => {
+            alert(message);
+          });
       };
       document.body.appendChild(script);
     </script>
